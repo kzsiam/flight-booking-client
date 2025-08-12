@@ -8,7 +8,7 @@ const MainLayout = () => {
             <div>
                 <Navbar></Navbar>
             </div>
-            <div className='container mx-auto'>
+            <div className=''>
                 <Outlet></Outlet>
             </div>
             <div>

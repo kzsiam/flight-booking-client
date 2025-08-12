@@ -1,19 +1,29 @@
-import React from 'react';
+// import React from 'react';
+// import FlightSearch from './FlightSearch/FlightSearch';
 
-const Home = () => {
-    return (
-        <div>
-            <h1 className='text-red-800'>this is home</h1>
-            <button className="btn btn-neutral">Neutral</button>
-            <button className="btn btn-primary">Primary</button>
-            <button className="btn btn-secondary">Secondary</button>
-            <button className="btn btn-accent">Accent</button>
-            <button className="btn btn-info">Info</button>
-            <button className="btn btn-success">Success</button>
-            <button className="btn btn-warning">Warning</button>
-            <button className="btn btn-error">Error</button>
-        </div>
-    );
-};
+// const Home = () => {
+//     return (
+//         <div>
+//             <div className=" pb-20">
+//                 {/* Banner */}
+//                 <div className="relative">
+//                     <img
+//                         src="https://images.stockcake.com/public/d/b/e/dbe54b04-566e-4a54-a95f-af45c461b156_large/expansive-cloud-cover-stockcake.jpg"
+//                         alt="Ocean background"
+//                         className="w-full lg:h-96 object-cover"
+//                     />
+//                     <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
+//                         <h1 className="text-3xl font-bold">Welcome to <span className="text-primary">Flight Bookings!</span></h1>
+//                         <p className="text-lg">Find Flights</p>
+//                     </div>
+//                 </div>
 
-export default Home;
+//                 {/* Flight Search */}
+//                 <FlightSearch />
+//             </div>
+
+//         </div>
+//     );
+// };
+
+// export default Home;
