@@ -1,5 +1,9 @@
 import React from 'react';
 import FlightSearch from './FlightSearch/FlightSearch';
+import SpecialOffers from './SpecialOffers/SpecialOffers';
+import PromotionalBanners from './PromotionalBanners/PromotionalBanners';
+import PopularFlights from './PopularFlights/PopularFlights';
+import CustomerReviews from './CustomerReviews/CustomerReviews ';
 
 const Home = () => {
     return (
@@ -17,9 +21,18 @@ const Home = () => {
                         <p className="text-lg">Find Flights</p>
                     </div>
                 </div>
+                <div className='max-w-6xl mx-auto'>
+                    {/* Flight Search */}
+                    <FlightSearch />
+                    {/* special offers */}
+                    <SpecialOffers></SpecialOffers>
+                    <PromotionalBanners></PromotionalBanners>
+                    <PopularFlights></PopularFlights>
+                    <CustomerReviews></CustomerReviews>
+                    
+                </div>
 
-                {/* Flight Search */}
-                <FlightSearch />
+
             </div>
 
         </div>
@@ -27,3 +40,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+

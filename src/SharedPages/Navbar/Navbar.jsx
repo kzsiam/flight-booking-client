@@ -24,14 +24,14 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <div className='flex gap-2'>
+                        <div className='flex gap-5 text-sm font-semibold'>
                             <Link>My Bookings</Link>
                             <Link>Flight</Link>
                             <Link>Dashboard</Link>
                         </div>
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end text-sm font-semibold">
                     <Link to={'/signin'}>Signin</Link>
                 </div>
             </div>
