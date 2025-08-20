@@ -16,7 +16,7 @@ const Navbar = () => {
                             
                                 <Link>My Bookings</Link>
                                 <Link>Flight</Link>
-                                <Link>Dashboard</Link>
+                                <Link to={'/dashboard'}>Dashboard</Link>
                            
                         </ul>
                     </div>
@@ -27,7 +27,7 @@ const Navbar = () => {
                         <div className='flex gap-5 text-sm font-semibold'>
                             <Link>My Bookings</Link>
                             <Link>Flight</Link>
-                            <Link>Dashboard</Link>
+                            <Link to={'/dashboard'}>Dashboard</Link>
                         </div>
                     </ul>
                 </div>

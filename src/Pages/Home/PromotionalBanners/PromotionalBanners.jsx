@@ -40,7 +40,7 @@ const PromotionalBanners = () => {
 
                 {/* Arrows */}
                 <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                    <button onClick={prevSlide} className="btn bg-gray-700 btn-circle">❮</button>
+                    <button onClick={prevSlide} className="btn bg-gray-50 btn-circle">❮</button>
                     <button onClick={nextSlide} className="btn bg-gray-50 btn-circle">❯</button>
                 </div>
 

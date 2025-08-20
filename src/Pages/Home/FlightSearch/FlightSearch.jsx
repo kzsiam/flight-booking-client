@@ -58,7 +58,7 @@ const FlightSearch = () => {
                                 key={type}
                                 onClick={() => setTripType(type)}
                                 className={`px-2 py-1 rounded-lg border-[0.5px] border-gray-300 capitalize ${tripType === type
-                                    ? "bg-blue-500 text-white text-sm"
+                                    ? "bg-blue-600 text-white text-sm"
                                     : "bg-white hover:bg-gray-100 text-sm"
                                     }`}
                             >
@@ -68,10 +68,10 @@ const FlightSearch = () => {
                             </button>
                         ))}
                     </div>
-                    <div className='flex'>
+                    <div className='flex mb-2'>
                         <div className=''>
                             <div className="dropdown">
-                                <label tabIndex={0} className="btn bg-blue-400 btn-sm m-1">
+                                <label tabIndex={0} className="btn bg-blue-600 text-white btn-sm m-1">
                                     {totalPassengers} Travelers
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -79,7 +79,7 @@ const FlightSearch = () => {
                                 </label>
                                 <div
                                     tabIndex={0}
-                                    className="dropdown-content menu p-4 shadow bg-base-100 rounded-box w-72">
+                                    className="dropdown-content menu p-4 shadow bg-base-100  rounded-box w-72">
                                     {categories.map((cat) => (
 
                                         <div
@@ -122,7 +122,7 @@ const FlightSearch = () => {
                         <div>
 
                             <div className="dropdown">
-                                <label tabIndex={0} className="btn  bg-blue-400 btn-sm m-1">
+                                <label tabIndex={0} className="btn  bg-blue-600 text-white btn-sm m-1">
                                     {selectedClass} <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-3">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
@@ -242,7 +242,7 @@ const FlightSearch = () => {
 
                 {/* Search Button */}
                 <div className="mt-6">
-                    <button className="bg-orange-500 text-white px-6 py-2 rounded-lg">
+                    <button className="btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
                         Search
                     </button>
                 </div>

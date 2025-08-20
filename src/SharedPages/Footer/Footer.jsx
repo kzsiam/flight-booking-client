@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            <footer className="bg-cyan-700 text-white py-10">
+            <footer className="bg-blue-600 text-white py-10">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Discover */}
                     <div>
@@ -38,8 +38,8 @@ const Footer = () => {
                         </p>
                         <h3 className="font-semibold mb-2">Experience Center</h3>
                         <p className="text-sm">
-                            Sheltech Ayaan, House 58, Road 6 & 11, <br />
-                            Block C, Level 2, Banani, Dhaka
+                            MeghFly, House 90, Road 12 & 13, <br />
+                            Block e, Level 9, Mirpur, Dhaka
                         </p>
                     </div>
 
@@ -47,7 +47,7 @@ const Footer = () => {
                     <div>
                         <h3 className="font-semibold mb-3">Contact</h3>
                         <p className="text-sm">info@meghfly.com</p>
-                        <p className="text-sm mb-3">+88 09678 76485745</p>
+                        <p className="text-sm mb-3">+88 845645834575</p>
 
                         {/* Social icons */}
                         <div className="flex gap-4 mt-2">
