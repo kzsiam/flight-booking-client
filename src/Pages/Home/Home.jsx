@@ -12,7 +12,7 @@ const Home = () => {
                 {/* Banner */}
                 <div className="relative">
                     <img
-                        src="https://images.stockcake.com/public/d/b/e/dbe54b04-566e-4a54-a95f-af45c461b156_large/expansive-cloud-cover-stockcake.jpg"
+                        src="https://images.theconversation.com/files/105468/original/image-20151211-8291-vynzgu.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=926&fit=clip"
                         alt="Ocean background"
                         className="w-full lg:h-96 object-cover"
                     />
@@ -29,7 +29,9 @@ const Home = () => {
                     <PromotionalBanners></PromotionalBanners>
                     <PopularFlights></PopularFlights>
                     <CustomerReviews></CustomerReviews>
+
                     
+
                 </div>
 
 
