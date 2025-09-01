@@ -25,6 +25,7 @@ const reviews = [
 ];
 
 const CustomerReviews = () => {
+    
     return (
         <div>
             <section className="max-w-7xl mt-20 mx-auto lg:px-18 px-10">
