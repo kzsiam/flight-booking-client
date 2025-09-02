@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [stage, setStage] = useState("signup");
-    const [timer, setTimer] = useState(50);
+    const [timer, setTimer] = useState(300);
     const [code, setCode] = useState("");
     const [email, setEmail] = useState();
     const [loadingResend, setLoadingResend] = useState(false);
@@ -40,16 +40,15 @@ const SignUp = () => {
                 email, password
             });
 
-            console.log(res.data);
 
             if (res.data.message === "User already exists") {
-                alert("User already exists");
+                toast.error("User already exists");
             } else {
                 setStage("verify"); // move to verify stage
             }
         } catch (err) {
             console.error(err);
-            alert("Something went wrong!");
+            toast.error("Something went wrong!");
         } finally {
             setLoading(false); // stop loading after request
         }
@@ -108,11 +107,16 @@ const SignUp = () => {
 
             if (res.data.message === "Signup Successful") {
                 login(res.data.user);
+                const user = res.data.user;
+                axios.post("http://localhost:3000/jwt", user,{
+                    withCredentials: true
+                })
+                
                 navigate("/");
             }
         } catch (err) {
             console.error(err);
-            alert("Verification failed!");
+            toast.error("Verification failed!");
         } finally {
             setLoading(false);
         }
@@ -143,7 +147,7 @@ const SignUp = () => {
         setLoadingResend(true);
         try {
             await axios.post("http://localhost:3000/resend-otp", { email });
-            setTimer(50); // reset 5-minute countdown
+            setTimer(300); // reset 5-minute countdown
             toast.success("OTP resent successfully!", { position: "top-center" });
         } catch (err) {
             console.error(err);

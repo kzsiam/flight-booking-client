@@ -26,6 +26,10 @@ const Signin = () => {
             );
             console.log(res.data.message)
             login(res.data.user)
+            const user = res.data.user;
+            axios.post("http://localhost:3000/jwt", user, {
+                withCredentials: true
+            })
             navigate("/");
         } catch (err) {
             setLoginError("Email or password is incorrect.")

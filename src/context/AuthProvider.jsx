@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 // 1️⃣ Create context
@@ -22,22 +23,29 @@ const AuthProvider = ({ children }) => {
   };
 
   // Logout -> Clear user
-  const logout = () => {
-    localStorage.removeItem("user");
+const logout = async () => {
+  try {
+    await axios.post("http://localhost:3000/logout", {}, { withCredentials: true });
+    localStorage.removeItem("user"); // optional
     setUser(null);
-  };
+    console.log("Logged out successfully");
+  } catch (err) {
+    console.error("Logout failed", err);
+  }
+};
 
   useEffect(() => {
   // Check if redirected from Google login
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("googleLogin") === "success") {
-    fetch("http://localhost:3000/auth/me", {
-      credentials: "include", // important for cookies/session
+    axios.get("http://localhost:3000/auth/me", {
+      withCredentials: true // important for cookies/session
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.user) {
-          setUser(data.user); // save user globally
+      .then((res) => {
+        console.log(res.data.user)
+        if (res.data.user) {
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          setUser(res.data.user); // save user globally
         }
       });
   }
