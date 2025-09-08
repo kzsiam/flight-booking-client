@@ -8,7 +8,7 @@ import CustomerReviews from './CustomerReviews/CustomerReviews ';
 const Home = () => {
     return (
         <div>
-            <div className="pb-20">
+            <div className="pb-20 text-black dark:text-red-600">
                 {/* Banner */}
                 <div className="relative">
                     <img

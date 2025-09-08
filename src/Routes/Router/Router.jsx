@@ -4,6 +4,8 @@ import Home from "../../Pages/Home/Home";
 import Signin from "../../Pages/Signin/Signin";
 import Signup from "../../Pages/Signup/Signup";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import ForgotPassword from "../../Pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "../../Pages/ResetPassword/ResetPassword";
 
 export const router = createBrowserRouter([
    {
@@ -21,6 +23,14 @@ export const router = createBrowserRouter([
         {
             path: '/signup',
             element:<Signup></Signup>
+        },
+        {
+            path: '/forgot-password',
+            element:<ForgotPassword></ForgotPassword>
+        },
+        {
+            path: '/reset-password/:token',
+            element:<ResetPassword></ResetPassword>
         },
         
     ]
