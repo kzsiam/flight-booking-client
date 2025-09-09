@@ -11,15 +11,18 @@ const SignUp = () => {
     const [stage, setStage] = useState("signup");
     const [timer, setTimer] = useState(300);
     const [code, setCode] = useState("");
+    const [error, setError] = useState("");
     const [email, setEmail] = useState();
     const [loadingResend, setLoadingResend] = useState(false);
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const navigate = useNavigate()
     const { login } = useAuth();
+
     const {
         register,
         handleSubmit,
-    } = useForm()
+        formState: { errors },
+    } = useForm();
 
     useEffect(() => {
         if (stage === "signup") {
@@ -29,6 +32,10 @@ const SignUp = () => {
         }
     }, [stage]);
     const [loading, setLoading] = useState(false);
+   
+
+
+
     const handleRegister = async (data) => {
         setLoading(true); // start loading
         try {
@@ -36,10 +43,7 @@ const SignUp = () => {
             const password = data.password;
             setEmail(email);
 
-            const res = await axios.post("http://localhost:3000/signup", {
-                email, password
-            });
-
+            const res = await axios.post("http://localhost:3000/signup", { email, password });
 
             if (res.data.message === "User already exists") {
                 toast.error("User already exists");
@@ -54,7 +58,7 @@ const SignUp = () => {
         }
     };
 
-    // Handle OTP input
+
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return false;
 
@@ -108,10 +112,10 @@ const SignUp = () => {
             if (res.data.message === "Signup Successful") {
                 login(res.data.user);
                 const user = res.data.user;
-                axios.post("http://localhost:3000/jwt", user,{
+                axios.post("http://localhost:3000/jwt", user, {
                     withCredentials: true
                 })
-                
+
                 navigate("/");
             }
         } catch (err) {
@@ -157,9 +161,13 @@ const SignUp = () => {
         }
     };
 
-
-
-
+    const handleBack = () => {
+        if (window.history.length > 1) {
+            navigate(-1);
+        } else {
+            navigate("/"); // fallback to home if no history
+        }
+    };
 
 
     return (
@@ -169,6 +177,19 @@ const SignUp = () => {
                 <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
                     {/* Logo */}
                     <div className="flex items-center gap-2 mb-4">
+                        <button onClick={handleBack} className="cursor-pointer"><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#1E3A8A"  // Blue color
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg></button>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -211,10 +232,18 @@ const SignUp = () => {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     placeholder="some@pass#123"
-                                    {...register("password")}
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+                                            message:
+                                                "Password must be at least 8 characters, include uppercase, lowercase, number, and special character",
+                                        },
+                                    })}
                                     className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                                    required
                                 />
+
+
                                 <button
                                     type="button"
                                     className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
@@ -222,9 +251,14 @@ const SignUp = () => {
                                 >
                                     {showPassword ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4"> <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /> <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /> </svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4"> <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" /> <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" /> <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" /> </svg>}
                                 </button>
+
                             </div>
                         </div>
 
+                        {/* Show error message if password is invalid */}
+                        {errors.password && (
+                            <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                        )}
                         {/* Terms */}
                         <div className="flex items-center mb-6 mt-2">
                             <input type="checkbox" className="checkbox checkbox-primary w-4 h-4 mr-2" required />
@@ -235,11 +269,34 @@ const SignUp = () => {
                                 </a>
                             </span>
                         </div>
-
-                        {/* Button */}
-                        {/* <button type="submit" className="btn btn-primary w-full">Sign Up</button> */}
-                        <button type="submit" className="btn btn-primary w-full" disabled={loading}>
-                            {loading ? "Loading..." : "Sign Up"}
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className={`w-full flex justify-center items-center bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+                        >
+                            {loading ? (
+                                <svg
+                                    className="animate-spin h-5 w-5 mr-2 text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        className="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        strokeWidth="4"
+                                    ></circle>
+                                    <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
+                                    ></path>
+                                </svg>
+                            ) : null}
+                            {loading ? "" : "Signup"}
                         </button>
                     </form>
 
@@ -255,17 +312,23 @@ const SignUp = () => {
                 :
                 <>
                     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+
                         <div className="card shadow-xl bg-white p-8 w-96">
-                            <div className="flex items-center gap-2 mb-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    className="w-7 h-7 text-blue-600"
-                                >
-                                    <path d="M12 2L15 8H9l3-6zM2 22h20L12 13 2 22z" />
-                                </svg>
-                                <h1 className="text-xl font-bold text-blue-600">MeghFly</h1>
+                            <div className="flex items-center justify-between gap-2 mb-4">
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-7 h-7 text-blue-600"
+                                    >
+                                        <path d="M12 2L15 8H9l3-6zM2 22h20L12 13 2 22z" />
+                                    </svg>
+                                    <h1 className="text-xl font-bold text-blue-600">MeghFly</h1>
+                                </div>
+                                <div>
+                                    <Link to={'/signin'}>Skip</Link>
+                                </div>
                             </div>
                             <p className="text-sm text-center mb-3">
                                 To Confirm The Email Enter 6 Digit OTP Here

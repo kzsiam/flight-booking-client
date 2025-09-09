@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 // 1️⃣ Create context
@@ -36,6 +37,7 @@ const AuthProvider = ({ children }) => {
       console.error("Logout failed", err);
     }
   };
+  
 
   useEffect(() => {
     // Check if redirected from Google login

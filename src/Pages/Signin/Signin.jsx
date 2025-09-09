@@ -1,11 +1,10 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, } from 'react-router-dom';
-import { AuthContext, useAuth } from '../../context/AuthProvider';
+import {  useAuth } from '../../context/AuthProvider';
 
 const Signin = () => {
-    const { setUser } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState("");
 
@@ -110,9 +109,9 @@ const Signin = () => {
 
                         {/* Forgot password */}
                         <div className="flex justify-end">
-                            <a href="#" className="text-sm text-blue-500 hover:underline">
+                            <Link to={'/forgot-password'}className="text-sm text-blue-500 hover:underline">
                                 Forgot Password?
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Submit */}

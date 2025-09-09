@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const ForgotPassword = () => {
@@ -8,6 +9,7 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState("")
     const [msg, setMsg] = useState("");
     const [loading, setLoading] = useState(false); // <-- For button loading
+    const navigate = useNavigate()
 
 
 
@@ -31,16 +33,38 @@ const ForgotPassword = () => {
         catch (err) {
             toast.error("Error sending reset link");
         }
-        finally{
+        finally {
             setLoading(false)
         }
     };
+
+    const handleBack = () => {
+        if (window.history.length > 1) {
+            navigate(-1);
+        } else {
+            navigate("/"); // fallback to home if no history
+        }
+    };
+
 
 
     return (
         <div className="min-h-screen flex justify-center items-center p-4">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-6">
                 <div className="flex items-center gap-2 mb-4">
+                    <button onClick={handleBack} className="cursor-pointer"><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#1E3A8A"  // Blue color
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg></button>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
